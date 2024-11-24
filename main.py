@@ -7,10 +7,9 @@ from handlers.user_panel.start_functions import start_functions_private_router
 from middlewares.db import DataBaseSession
 
 load_dotenv(find_dotenv())
-
-from database.engine import session_maker
+from database.engine import session_maker, drop_db, create_db
 from common.bot_cmds_list import private
-from aiogram.client.session.aiohttp import AiohttpSession
+
 
 bot = Bot(token=os.getenv('TOKEN'))
 bot.my_admins_list = [5627082052,]
@@ -23,11 +22,16 @@ dp.include_router(start_functions_private_router)
 
 
 async def on_startup(bot):
+    run_param = False
+    if run_param:
+        await drop_db()
+    await create_db()
     await bot.send_message(bot.my_admins_list[0], "Сервер успешно запущен! 😊 Привет, босс!")
 
 
 async def on_shutdown(bot):
     await bot.send_message(bot.my_admins_list[0], "Сервер остановлен. 😔 Проверьте его состояние, босс!")
+
 
 
 async def main():
