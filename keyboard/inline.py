@@ -6,11 +6,16 @@ from message_text.text import *
 def start_functions_keyboard(language: str):
     """Функция для создания клавиатуры."""
     keyboard = InlineKeyboardBuilder()
+
+    keyboard.add(InlineKeyboardButton(
+        text=f"🤖 {button_texts[language]['ai_help']}",
+        callback_data='ai_help'
+    ))
     keyboard.add(InlineKeyboardButton(
         text=f"🌐 {button_texts[language]['select_language']}",
         callback_data='change_language'
     ))
-    return keyboard.adjust(1,).as_markup()
+    return keyboard.adjust(1, ).as_markup()
 
 
 def language_selection_keyboard(language: str):
@@ -25,3 +30,17 @@ def language_selection_keyboard(language: str):
 
     return keyboard.adjust(3).as_markup()
 
+
+def get_cancel_keyboard(language: str):
+    keyboard = InlineKeyboardBuilder()
+    keyboard.add(
+        InlineKeyboardButton(text=cancel[language], callback_data="cancel_ai_help"))
+    return keyboard.adjust(1).as_markup()
+
+
+def get_cancel_ai_help_keyboard(language: str):
+    keyboard = InlineKeyboardBuilder()
+    cancel_button = InlineKeyboardButton(text=cancel[language], callback_data="cancel_ai_help")
+    start_button = InlineKeyboardButton(text=chat_messages[language]['start_over'], callback_data="start_help")
+    keyboard.add(cancel_button, start_button)
+    return keyboard.adjust(1).as_markup()
