@@ -3,6 +3,8 @@ import os
 from aiogram import Bot, Dispatcher, types
 from aiogram.enums import ParseMode
 from dotenv import find_dotenv, load_dotenv
+
+from handlers.user_panel.ai_help import ai_help_private_router
 from handlers.user_panel.start_functions import start_functions_private_router
 from middlewares.db import DataBaseSession
 
@@ -19,6 +21,7 @@ bot.group_id = os.getenv('group_id')
 dp = Dispatcher()
 
 dp.include_router(start_functions_private_router)
+dp.include_router(ai_help_private_router)
 
 
 async def on_startup(bot):
