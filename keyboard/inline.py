@@ -40,7 +40,6 @@ def get_cancel_keyboard(language: str):
 
 def get_cancel_ai_help_keyboard(language: str):
     keyboard = InlineKeyboardBuilder()
-    cancel_button = InlineKeyboardButton(text=cancel[language], callback_data="cancel_ai_help")
     start_button = InlineKeyboardButton(text=chat_messages[language]['start_over'], callback_data="start_help")
     keyboard.add(cancel_button, start_button)
     return keyboard.adjust(1).as_markup()

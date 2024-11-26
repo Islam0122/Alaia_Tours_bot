@@ -23,6 +23,7 @@ class AiAssistanceState(StatesGroup):
 async def send_review_request_callback_query(query: types.CallbackQuery, state: FSMContext) -> None:
     user_id = query.from_user.id
     language = user_preferences.get(user_id, {}).get('language', 'ru')
+    await state.clear()
 
     await query.message.edit_caption(
         caption=messages[language]['ai_help_message'],
