@@ -42,18 +42,38 @@ async def cancel_feedback(query: types.CallbackQuery, state: FSMContext) -> None
 
 
 @ai_help_private_router.message(AiAssistanceState.WaitingForReview)
-async def process_help_request(message: types.Message, state: FSMContext, bot: Bot):
+async def process_help_request(message: types.Message, state: FSMContext,bot: Bot):
     language = user_preferences.get(message.from_user.id, {}).get('language', 'ru')
 
-    if message.text:
-        await state.clear()
-        await message.answer(f"Запрос принят, @duishobaevislam01!\n💭Ещё чуть-чуть, готовлю ответ")
-        generated_help = sent_prompt_and_get_response(message.text)
-        await message.edit_text(generated_help, reply_markup=start_functions_keyboard(language))
-        await state.clear()
+    # Формируем информацию о пользователе
+    user_info = message.from_user.first_name or ""
+    if message.from_user.last_name:
+        user_info += f" {message.from_user.last_name}"
+    if message.from_user.username:
+        user_info += f" (@{message.from_user.username})"
 
+    if message.text:
+        # Отправляем сообщение с подтверждением и сохраняем его
+        processing_message = await message.answer(
+            f"Запрос принят, {user_info}!\n💭 Ещё чуть-чуть, готовлю ответ..."
+        )
+
+        # Генерация ответа
+        generated_help = sent_prompt_and_get_response(message.text)
+
+        # Редактируем сообщение с подтверждением
+        await bot.edit_message_text(
+            chat_id=processing_message.chat.id,
+            message_id=processing_message.message_id,
+            text=generated_help,
+            reply_markup=start_functions_keyboard(language)
+        )
+
+        # Сброс состояния
         await state.clear()
     else:
+        # Сообщение об ошибке
         keyboard = InlineKeyboardMarkup()
         keyboard.add(InlineKeyboardButton(text=cancel[language], callback_data="cancel_create_feedback"))
         await message.answer(messages[language]['city_not_found'], reply_markup=keyboard)
+
