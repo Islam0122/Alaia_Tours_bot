@@ -57,9 +57,8 @@ async def process_help_request(message: types.Message, state: FSMContext,bot: Bo
     if message.text:
         # Отправляем сообщение с подтверждением и сохраняем его
         processing_message = await message.answer(
-            f"Запрос принят, {user_info}!\n💭 Ещё чуть-чуть, готовлю ответ..."
+            messages[language]["sent_message_user_waiting"].format(user_info=user_info)
         )
-
         # Генерация ответа
         generated_help = sent_prompt_and_get_response(message.text)
 
