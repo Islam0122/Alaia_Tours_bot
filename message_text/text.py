@@ -35,6 +35,8 @@ chat_messages = {
         'ai_help': "Пожалуйста, отправьте свой запрос.",
         'city_info': "Вот информация о вашем запросе: {city}. В {city} вы можете посетить лучшие места для отдыха: [ссылки на места].",
         'city_not_found': "Извините, информация о таком месте не найдена.",
+        'start_over': "Начать заново",
+
     },
     'kgz': {
         'ai_help_message': "Биз сизге жардам берүүгө даярбыз! Суранычыңызды жазыңыз, кайсы шаарды же жайды билгиңиз келсе.",
@@ -43,6 +45,8 @@ chat_messages = {
         'ai_help': "Суранычыңызды жөнөтүңүз.",
         'city_info': "Бул жерге маалымат: {city}. {city} шаарында дем алыш үчүн мыкты жерлерди көрө аласыз: [жерлерге шилтемелер].",
         'city_not_found': "Кечиресиз, мындай жер боюнча маалымат табылбады.",
+        'start_over': "Жаныдын баштоо",
+
     },
     'en': {
         'ai_help_message': "We are ready to assist you! Please write the name of the city or place you'd like to know about.",
@@ -51,6 +55,8 @@ chat_messages = {
         'ai_help': "Please submit your query.",
         'city_info': "Here is the information about your query: {city}. In {city}, you can visit the best places for recreation: [links to places].",
         'city_not_found': "Sorry, no information found for this place.",
+        'start_over': "Start over",
+
     }
 }
 cancel = {

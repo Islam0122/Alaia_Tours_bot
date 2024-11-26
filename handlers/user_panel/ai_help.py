@@ -19,6 +19,7 @@ class AiAssistanceState(StatesGroup):
 
 
 @ai_help_private_router.callback_query(F.data.startswith("ai_help"))
+@ai_help_private_router.callback_query(F.data.startswith("start_help"))
 async def send_review_request_callback_query(query: types.CallbackQuery, state: FSMContext) -> None:
     user_id = query.from_user.id
     language = user_preferences.get(user_id, {}).get('language', 'ru')
