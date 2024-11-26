@@ -46,9 +46,13 @@ async def process_help_request(message: types.Message, state: FSMContext, bot: B
     language = user_preferences.get(message.from_user.id, {}).get('language', 'ru')
 
     if message.text:
-        generated_help = sent_prompt_and_get_response(message.text)
         await state.clear()
-        await message.answer(generated_help, reply_markup=start_functions_keyboard(language))
+        await message.answer(f"Запрос принят, @duishobaevislam01!\n💭Ещё чуть-чуть, готовлю ответ")
+        generated_help = sent_prompt_and_get_response(message.text)
+        await message.edit_text(generated_help, reply_markup=start_functions_keyboard(language))
+        await state.clear()
+
+        await state.clear()
     else:
         keyboard = InlineKeyboardMarkup()
         keyboard.add(InlineKeyboardButton(text=cancel[language], callback_data="cancel_create_feedback"))
