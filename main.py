@@ -3,15 +3,13 @@ import os
 from aiogram import Bot, Dispatcher, types
 from aiogram.enums import ParseMode
 from dotenv import find_dotenv, load_dotenv
-
-from handlers.user_panel.ai_help import ai_help_private_router
-from handlers.user_panel.start_functions import start_functions_private_router
 from middlewares.db import DataBaseSession
 
 load_dotenv(find_dotenv())
 from database.engine import session_maker, drop_db, create_db
 from common.bot_cmds_list import private
-
+from handlers.user_panel.ai_help import ai_help_private_router
+from handlers.user_panel.start_functions import start_functions_private_router
 
 bot = Bot(token=os.getenv('TOKEN'))
 bot.my_admins_list = [5627082052,]
