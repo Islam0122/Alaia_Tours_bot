@@ -11,7 +11,7 @@ from common.bot_cmds_list import private
 from handlers.user_panel.ai_help import ai_help_private_router
 from handlers.user_panel.start_functions import start_functions_private_router
 
-bot = Bot(token=os.getenv('TOKEN'))
+bot = Bot(token="7797855876:AAGN4tp4jdTDWj8MBYdARdS0wEcxCqnVc1o")
 bot.my_admins_list = [5627082052,]
 bot.group_id = os.getenv('group_id')
 
